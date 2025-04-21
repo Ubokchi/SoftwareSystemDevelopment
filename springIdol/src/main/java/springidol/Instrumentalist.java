@@ -17,7 +17,7 @@ public class Instrumentalist implements Performer {
 
 	@Override
 	public void perform() throws PerformanceException {
-		System.out.print("Playing " + song + " : ");
+		System.out.print("while playing " + instrument + " ");
 		instrument.play();
 	}
 }

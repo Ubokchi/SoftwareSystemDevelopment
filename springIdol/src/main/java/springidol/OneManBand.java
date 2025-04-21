@@ -1,22 +1,23 @@
 package springidol;
 
-import java.util.Properties;
+import java.util.Map;
 
 public class OneManBand implements Performer {
-	private Properties instruments;
+	private Map<String, Instrument> instruments;
 
 	public OneManBand() {
 	}
 
-	public void setInstruments(Properties instruments) {
+	public void setInstruments (Map<String, Instrument> instruments) {
 		this.instruments = instruments;
 	}
 
 	@Override
 	public void perform() throws PerformanceException {
-		for (Object element : instruments.keySet()) {
-			String key = (String) element;
-			System.out.println(key + " : " + instruments.getProperty(key));
+		for (String key : instruments.keySet()) {
+			System.out.print(key + ": ");
+			Instrument instrument = instruments.get(key);
+			instrument.play();
 		}
 	}
 

@@ -27,16 +27,19 @@
 
 	<bean id="kenny" class="springidol.Instrumentalist">
 		<property name="song" value="Jingle Bells" />
-		<property name="instrument" ref="saxophone" />
+		<property name="instrument" ref="guitar" />
 	</bean>
 
 	<bean id="hank" class="springidol.OneManBand">
 		<property name="instruments">
-			<props>
-				<prop key="GUITAR">STRUM STRUM STRUM</prop>
-				<prop key="CYMBAL">CRASH CRASH CRASH</prop>
-				<prop key="HARMONICA">HUM HUM HUM</prop>
-			</props>
+			<map>
+				<entry>
+					<key><value>HARMORNIC</value></key>
+					<ref bean="harmonica"/>
+				</entry>
+				<entry key="GUITAR" value-ref="guitar"/>
+				<entry key="CYMBAL" value-ref="cymbal"/>				
+			</map>
 		</property>
 	</bean>
 	
@@ -49,5 +52,5 @@
 	<bean id="cymbal" class="springidol.Cymbal" />
 	<bean id="guitar" class="springidol.Guitar" />
 	<bean id="saxophone" class="springidol.Saxophone" />
-
+	<bean id="piano" class="springidol.Piano" />
 </beans>

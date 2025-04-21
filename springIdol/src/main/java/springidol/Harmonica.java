@@ -5,6 +5,6 @@ public class Harmonica implements Instrument {
 	}
 
 	public void play() {
-		System.out.println("HUM HUM HUM~~");
+		System.out.print("HUM HUM HUM~~");
 	}
 }

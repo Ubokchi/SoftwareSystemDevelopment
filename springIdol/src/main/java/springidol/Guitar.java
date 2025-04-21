@@ -5,6 +5,6 @@ public class Guitar implements Instrument {
 	}
 
 	public void play() {
-		System.out.println("STRUM STRUM STRUM~~");
+		System.out.print("STRUM STRUM STRUM~~");
 	}
 }
