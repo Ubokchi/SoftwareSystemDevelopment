@@ -13,6 +13,9 @@
 				<ref bean="duke" />
 				<ref bean="kenny" />
 				<ref bean="hank" />
+				<ref bean="lena" />
+				<ref bean="hynn" />
+				<ref bean="marc" />
 			</list>
 		</property>
 	</bean>
@@ -27,21 +30,47 @@
 
 	<bean id="kenny" class="springidol.Instrumentalist">
 		<property name="song" value="Jingle Bells" />
-		<property name="instrument" ref="saxophone" />
+		<property name="instrument" ref="guitar" />
 	</bean>
 
 	<bean id="hank" class="springidol.OneManBand">
 		<property name="instruments">
-			<props>
-				<prop key="GUITAR">STRUM STRUM STRUM</prop>
-				<prop key="CYMBAL">CRASH CRASH CRASH</prop>
-				<prop key="HARMONICA">HUM HUM HUM</prop>
-			</props>
+			<map>
+				<entry>
+					<key><value>HARMONIC</value></key>
+					<ref bean="harmonica"/>
+				</entry>
+				<entry key="CYMBAL" value-ref="cymbal" />
+				<entry key="SAXOPHONE" value-ref="saxophone" />
+			</map>
 		</property>
 	</bean>
 	
 	<bean id="sonnet29" class="springidol.Sonnet29" />
 	
+	<bean id="lena" class="springidol.Singer" >
+		<constructor-arg value="Lena Park" />
+		<constructor-arg ref="Someone Like You" />
+	</bean>
+	<bean id="hynn" class="springidol.Singer" >
+		<constructor-arg value="Hyewon Park" />
+		<constructor-arg ref="Someone Like You" />
+		<constructor-arg ref="piano" />
+	</bean>
+	<bean id="marc" class="springidol.Singer" >
+		<constructor-arg value="Marc Martel" />
+		<constructor-arg ref="Love My Life" />
+		<constructor-arg ref="guitar" />
+	</bean>
+	
+	<bean id="Someone Like You" class="springidol.Song" >
+		<property name="title" value="Someone Like You" />
+		<property name="artist" value="Adele" />
+	</bean>
+	<bean id="Love My Life" class="springidol.Song" >
+		<property name="title" value="Love My Life" />
+		<property name="artist" value="Queen" />
+	</bean>
 	<!-- ==================================================================== -->
 	<!-- Instruments performers can use -->
 	<!-- ==================================================================== -->
@@ -49,5 +78,5 @@
 	<bean id="cymbal" class="springidol.Cymbal" />
 	<bean id="guitar" class="springidol.Guitar" />
 	<bean id="saxophone" class="springidol.Saxophone" />
-
+	<bean id="piano" class="springidol.Piano" />
 </beans>
