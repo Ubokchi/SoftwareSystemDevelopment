@@ -1,7 +1,10 @@
 package springidol.annotation;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 //import jakarta.inject.Inject;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Component;
 //import jakarta.annotation.Resource;
 
 @Component("kenny")
+@Order(2)
 //또는 @Named("kenny")
 public class Instrumentalist implements Performer {
 	
@@ -17,7 +21,7 @@ public class Instrumentalist implements Performer {
 	
 	@Autowired
 	// @Autowired @Qualifier("guitar")
-	// 또는 @Resource(name="guitar") 
+	@Resource(name="guitar") 
 	// 또는 @Inject @Named("guitar")    
 	private Instrument instrument;
 
