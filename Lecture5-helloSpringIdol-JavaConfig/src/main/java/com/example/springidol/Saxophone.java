@@ -11,7 +11,7 @@ public class Saxophone implements Instrument {
 	public Saxophone() {
 	}
 
-	public void play() {
-		System.out.println(sound);
+	public String play() {
+		return sound;
 	}
 }

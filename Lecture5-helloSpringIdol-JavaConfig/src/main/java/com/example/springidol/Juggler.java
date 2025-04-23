@@ -12,8 +12,8 @@ public class Juggler implements Performer, BeanNameAware {
 		this.beanBags = beanBags;
 	}
 
-	public void perform() throws PerformanceException {
-		System.out.println("JUGGLING " + beanBags + " BEANBAGS");
+	public String perform() throws PerformanceException {
+		return "JUGGLING " + beanBags + " BEANBAGS\n";
 	}
 
 	private String beanName;

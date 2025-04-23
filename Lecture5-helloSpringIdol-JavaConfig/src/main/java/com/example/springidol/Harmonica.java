@@ -9,7 +9,7 @@ public class Harmonica implements Instrument {
 	public Harmonica() {
 	}
 
-	public void play() {
-		System.out.println("HUM HUM HUM");
+	public String play() {
+		return "HUM HUM HUM";
 	}
 }

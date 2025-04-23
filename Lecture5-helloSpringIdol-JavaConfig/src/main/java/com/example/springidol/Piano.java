@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 public class Piano implements Instrument {
 	public Piano() {}
   
-	public void play() {
-		System.out.println("PLINK PLINK PLINK");
+	public String play() {
+		return "PLINK PLINK PLINK";
 	}
   
 	public void tune() {

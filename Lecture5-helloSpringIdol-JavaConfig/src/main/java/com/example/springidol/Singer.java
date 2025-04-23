@@ -40,9 +40,9 @@ public class Singer implements Performer, BeanNameAware {
 	}
 	
 	@Override
-	public void perform() throws PerformanceException {
-		System.out.println(name + " is singing a song \"" + song.getTitle() + "\""
-							+ " by " + song.getArtist());
+	public String perform() throws PerformanceException {
+		return name + " is singing a song \"" + song.getTitle() + "\""
+							+ " by " + song.getArtist();
 	}
 
 	private String beanName;
