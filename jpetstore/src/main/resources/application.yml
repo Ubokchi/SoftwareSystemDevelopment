@@ -6,9 +6,7 @@ spring:
 #    url: jdbc:oracle:thin:@(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=...))(connect_data=(service_name=...))(security=(ssl_server_dn_match=yes)))
     username: jpetstore
     password: spring2024
-    hikari:          # HikariCP settings           
-      maximumPoolSize: 3
-      connectionTimeout: 3000
+#    hikari:          # HikariCP settings
 #      minimumIdle: 5
 #      maximumPoolSize: 20
 #      idleTimeout: 30000
@@ -25,6 +23,8 @@ spring:
       
 mybatis:
   type-aliases-package: com.example.jpetstore.domain
+  configuration:
+    cache-enabled: false            #true    #default    
 #  mapper-locations: com/example/jpetstore/dao/mybatis/mapper/**/*.xml
   
 logging:

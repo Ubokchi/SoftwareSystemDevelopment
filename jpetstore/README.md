@@ -1,20 +1,37 @@
-# JPetStore (boot)
-JPetStore project based on Spring Boot 3.4
+# boot-rest branch
+Spring boot를 기반으로 RESTful Service를 구현
 
-####변경 사항 (from master)  
-1. pom.xml: Spring Boot Starter Dependencies 사용 
-2. com.example.jpetstore.JpetstoreBootApplication: 시작 및 설정 클래스 
-3. com.example.jpetstore.WebMvcConfig: Spring MVC 관련 설정 클래스
-4. com.example.jpetstore.controller.SignonInterceptor: @Component 추가 (bean scan 대상)
-5. com.example.jpetstore.controller.dao.mybatis.mapper.*: @Mapper 추가 (mapper scan 대상)
-6. src/main/resources/{기존 properties, xml 설정 파일} 삭제
-7. src/main/resources/application.yml: bean property 설정
-8. src/main/webapp/{images, style, *.html}를 src/main/resources/static/ 으로 이동 
-9. src/main/webapp/META-INF 삭제
-10. src/main/webapp/WEB-INF/*.xml 삭제
+### boot branch에 대한 변경 사항
+1. contoller.rest에 RestOrderController, RestProductController 클래스 정의
+    * REST service를 위한 request handler methods 정의
  
-####실행 및 테스트
-* Eclipse: com.example.jpetstore.JpetstoreBootApplication 선택 > Run As > Java Application  
-* Maven: mvnw spring-boot:run
-* http://localhost:8088/ 
+2. OrderService, OrderServiceImpl 클래스 수정
+    * removeOrder() method 선언 및 구현 
+     
+3. ProductService, ProductServiceImpl 클래스 추가
+    * Product에 대한 CRUD methods 선언 및 구현
 
+4. OrderDao, MyBatisOrderDao, OrderMapper, LineItemMapper 클래스 수정
+    * Order removeOrder(int orderId) 선언 및 구현 
+    * void deleteOrder(int orderId) 선언 및 SQL 정의 
+    * void deleteOrderStatus(int orderId) 선언 및 SQL 정의
+    * int deleteLineItems(int orderId) 선언 및 SQL 정의
+
+5. Product, ProductDao 수정 및 ProductRepository 클래스 추가
+    * Product Entity 정의 (based on JPA)
+    * ProductDao에 createProduct(), updateProduct(), removeProduct() methods 선언 추가
+    * ProductRepository interface 정의 (based on Spring Data JPA)
+  
+6. WEB-INF/jsp/ListOrder.jsp 수정
+    * 주문 목록에서 특정 price 셀을 클릭하면 Ajax 호출을 통해 /rest/order/{orderId}에 대한 GET 요청 생성  
+    * RestfulOrderController#getOrder()를 통해 주문 정보를 구하고 결과를 JSON data로 return
+    * 필요한 정보를 price 셀 안에 추가  
+    * 기존 price 셀을 다시 클릭하면 추가된 주문 정보를 삭제  
+ 
+6. WEB-INF/jsp/Category.jsp 수정
+    * 새로운 Product 생성 및 삭제를 위한 인터페이스 및 Javascript 함수 추가
+    * Ajax 호출을 통해 POST 및 DELETE 요청 생성
+
+8. client 패키지에 OrderServiceClient_rest, ProductServiceClient_rest 클래스 정의
+    * 위 Restful Service를 호출하는 client program (RestTemplate 이용)
+    
