@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>REST Service Examples</title>
+	<link rel="stylesheet" href="css/example.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="js/example.js"></script>
+</head>
+<body>
+	<h2>REST Service Examples</h2>
+	
+	<a href="/simple">/simple (GET)</a><br> 
+	또는 아래의 Form에 입력 및 요청 전송 (POST /simple) → @RequestBody(String) → Java 객체(String) → @ResponseBody(String) (<b>SimpleController#submit()</b>)<br><br>
+	<form method="POST" action="/simple"> 
+    	이름: <input type="text" name="name" /> <br/> 
+    	나이: <input type="text" name="age" /> 
+    	<input type="submit" /> 
+	</form>	
+	<br>
+	
+	<a href="/article/1">GET /article/1</a>: Java 객체(Article) → @ResponseBody(JSON data) (<b>ArticleController#getInJson()</b>)<br><br>
+
+	<a href="/articles">GET /articles</a>: Java 객체(List&lt;Article&gt;) → @ResponseBody(JSON data) (<b>ArticleController#getArticlesInJson()</b>)<br><br>
+	
+	<a href="javascript:postJson()">POST /articles (Ajax call in postJson())</a>: @RequestBody(JSON data) → Java 객체(List&lt;Article&gt;) → 내용 수정 → @ResponseBody(JSON data) (<b>ArticleController#postArticlesInJson()</b>)<br><br>
+	
+	<a href="ArticleForm.html">Article form</a>: Form 입력 → Ajax call(POST) → @RequestBody(JSON data) → Java 객체(List&lt;Article&gt;) → 내용 수정 → @ResponseBody(JSON data) (<b>ArticleController#postArticlesInJson()</b>)<br><br>
+	
+	<a href="/messages">GET /messages</a>: Java 객체(MessageList) → @ResponseBody(XML data) (<b>MessageController.getMsgsInXml()</b>)<br><br>
+	
+	<a href="javascript:postXml()">POST /messages (Ajax call in postXml())</a>: @RequestBody(XML data) → Java 객체(MessageList) → 내용 수정 → @ResponseBody(XML data) (<b>MessageController#postMsgsInXml()</b>)<br><br>
+	
+	<a href="/category/101">GET /category/101</a>, <a href="/category/102">GET /category/102</a>: 
+		Java 객체(Category) → @ResponseBody(JSON data) (<b>CategoryController#getCategory()</b>)<br><br>
+ 
+ 	<a href="/category/101/product/PT">GET /category/101/product/PT</a>:
+ 		Java 객체(Product) → @ResponseBody(JSON data) (<b>CategoryController#getProduct()</b>)<br><br>
+ 	<hr>
+	<div id="result" style="color:red;"></div><br>
+</body>
+</html>

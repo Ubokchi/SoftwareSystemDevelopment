@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>글 입력</title></head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+	function postJson2() {
+		var article1 = {
+			id: $('#id1').val(),
+			content: $('#content1').val(),
+			creationTime: new Date()
+		};
+		var article2 = {
+			id: $('#id2').val(),
+			content: $('#content2').val(),
+			creationTime: new Date()
+		};			
+		var articles = [article1, article2];
+		
+		alert("Request Body: " + JSON.stringify(articles));
+
+		/* 
+		$.ajax({			// Ajax 호출을 위해 JQuery 이용 
+			type: "POST",
+			url: "/articles",
+			contentType: "application/json",
+			data: JSON.stringify(articles),
+		})
+		.done(printResult)
+		.fail(function(jqXHR) {
+			alert("ERROR: "+ JSON.stringify(jqXHR));
+		}); 
+		*/
+		
+		// Ajax 호출을 위해 Fetch API 이용 
+		fetch("/articles", {				
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(articles)	// JSON text로 변환하여 요청 메시지 body에 포함
+		}) 
+		.then(response => response.json())
+		.then(data => printResult(data))
+		.catch(error => { 
+			alert("ERROR", error); 
+			console.error(error);
+		});
+	}
+	
+	function printResult(data) {	// data: JS object parsed from JSON text		
+		alert("글이 등록되었습니다.");
+		$("#result").html("Response Body: <div><div>");
+		$("#result > div").text(JSON.stringify(data));
+				
+		// 응답 데이터 사용		
+		$("#result").append("<br>응답 데이터 이용:<br>");
+	   	var ul = document.createElement("ul");			   	
+	   	for (const article of data) {	   		
+	   		var li = document.createElement("li");
+	   		$(li).text(`${article.id}, ${article.content}, ${new Date(article.creationTime)}`)
+	   			.appendTo(ul);
+        }
+	   	$("#result").append(ul);		
+   	}
+		
+	$(document).ready(function(){
+		$("#btn-submit").click(postJson2);
+	});
+
+	</script>
+</head>
+<body>
+<form id="articleForm"> 
+	<div>
+		Article #1<br>
+		- ID: <input type="text" id="id1" name="id1" placeholder="Input number..."/><br/> 
+		- Content: <input type="text" id="content1" name="content1"/><br> 
+    </div>
+    <br>
+    <div>
+	    Article #2<br>
+		- ID: <input type="text" id="id2" name="id2" placeholder="Input number..."/><br/> 
+		- Content: <input type="text" id="content2" name="content2"/><br> 
+    </div>
+    <br>
+    <button type="button" id="btn-submit">등록</button> 
+</form>
+<hr>
+<div id="result" style="color:red;"></div>
+
+</body>
+</html>
